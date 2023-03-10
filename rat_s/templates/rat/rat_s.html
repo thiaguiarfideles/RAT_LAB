@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <h3 class="text-center mb-7">Cadastro de solicitações rotinas e protocolos</h3>
+            <form method="post" enctype="multipart/form-data" id="form-cadastro">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{ form.nm_analista.id_for_label }}">Nome Profissional</label>
+                    {{ form.nm_analista|add_class:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.nm_medico.id_for_label }}">Nome Médico</label>
+                    {{ form.nm_medico|add_class:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.nm_hospital.id_for_label }}">Nome do Hospital</label>
+                    {{ form.nm_hospital|add_class:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.tel_contato.id_for_label }}">Telefone de Contato</label>
+                    {{ form.tel_contato|add_class:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.email.id_for_label }}">Email</label>
+                    {{ form.email|add_class:"form-control" }}
+                    <small id="emailHelp" class="form-text text-muted">Enviar email para o solicitante.</small>
+                  </div>
+                <div class="form-group">
+                    <label for="{{ form.dt_atendimento.id_for_label }}">Data do Atendimento</label>
+                    {{ form.dt_atendimento|add_class:"form-control" }}
+                    <div class="invalid-feedback">
+                        Por favor, preencha o campo Data do Atendimento.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.servico_analisado.id_for_label }}">Tipo de Validação</label>
+                    {{ form.servico_analisado|add_class:"form-control" }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.upload.id_for_label }}">Upload de Arquivo</label>
+                    {{ form.upload|add_class:"form-control-file" }}
+                </div>
+                <div class="form-group form-check">
+                    {{ form.utiliza_protocolo|add_class:"form-check-input" }}
+                    <label class="form-check-label" for="{{ form.utiliza_protocolo.id_for_label }}">Utiliza Protocolo Gerenciável?</label>
+                </div>
+                <div class="form-group form-check">
+                    {{ form.utiliza_rotina_especial|add_class:"form-check-input" }}
+                    <label class="form-check-label" for="{{ form.utiliza_rotina_especial.id_for_label }}">Utiliza Rotina Especial?</label>
+                </div>
+                <div class="form-group form-check">
+                    {{ form.utiliza_rotina|add_class:"form-check-input" }}
+                    <label class="form-check-label" for="{{ form.utiliza_rotina.id_for_label }}">Utiliza Rotina?</label>
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.comentarios.id_for_label }}">Comentários</label>
+                    {{ form.comentarios|add_class:"form-control" }}
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" formaction="{% url 'rat_s:generate_pdf' %}" class="btn btn-primary">Gerar PDF</button>
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
